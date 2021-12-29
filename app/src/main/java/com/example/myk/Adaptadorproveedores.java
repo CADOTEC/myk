@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class Adaptadorproveedores implements ListAdapter {
     private Context context;
     private ArrayList<claseproveedores> listitems;
-
+//cambio2
     public Adaptadorproveedores(Context context, ArrayList<claseproveedores> listitems) {
         this.context = context;
         this.listitems = listitems;
