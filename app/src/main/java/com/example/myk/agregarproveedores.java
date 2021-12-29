@@ -28,6 +28,7 @@ public class agregarproveedores extends AppCompatActivity {
     private  String telefono2txt="";
     private  String correotxt="";
     String gURL = "jdbc:mysql://";
+    //fkjdshfj
     String gIP = "34.68.109.84";
     String gPORT = "3306";
     String gDATABASE = "myk";
