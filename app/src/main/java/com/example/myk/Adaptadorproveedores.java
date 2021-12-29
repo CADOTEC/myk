@@ -22,7 +22,6 @@ public class Adaptadorproveedores implements ListAdapter {
         this.context = context;
         this.listitems = listitems;
     }
-//hola
 
 
     @Override
