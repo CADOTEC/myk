@@ -16,7 +16,6 @@ public class agregarpedidoultimo extends AppCompatActivity {
         pbpo=(TextView)findViewById(R.id.pesobrutopoagpeul);
         prga=(TextView)findViewById(R.id.pesorealgaagpeul);
         prpo=(TextView)findViewById(R.id.pesorealpoagpeul);
-//cambio3
         //cambio4
         String valorg = getIntent().getExtras().getString("pesogallina");
         String valorp = getIntent().getExtras().getString("pesopollos");
