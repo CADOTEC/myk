@@ -2,7 +2,7 @@ package com.example.myk;
 
 public class clasepedido
 {
-
+//hola
     private int img;
     private String id;
     private String dnioruc;
