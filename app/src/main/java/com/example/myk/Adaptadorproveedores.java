@@ -22,7 +22,7 @@ public class Adaptadorproveedores implements ListAdapter {
         this.context = context;
         this.listitems = listitems;
     }
-//daniel
+public void prueba1(){}
 
 
     @Override
