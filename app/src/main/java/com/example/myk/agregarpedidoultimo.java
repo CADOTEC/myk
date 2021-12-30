@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 public class agregarpedidoultimo extends AppCompatActivity {
     private TextView pbga,pbpo,prga,prpo;
+    EditText guiaet,encargadoet,observacionet;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,7 +17,9 @@ public class agregarpedidoultimo extends AppCompatActivity {
         pbpo=(TextView)findViewById(R.id.pesobrutopoagpeul);
         prga=(TextView)findViewById(R.id.pesorealgaagpeul);
         prpo=(TextView)findViewById(R.id.pesorealpoagpeul);
-        //cambio4
+        guiaet=(EditText)findViewById(R.id.guiaetagpeul);
+        encargadoet=(EditText)findViewById(R.id.encargadotxtagpe);
+        observacionet=(EditText)findViewById(R.id.observacionagpeul);
         String valorg = getIntent().getExtras().getString("pesogallina");
         String valorp = getIntent().getExtras().getString("pesopollos");
 

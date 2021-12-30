@@ -40,62 +40,14 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout18"
+        android:id="@+id/linearLayout20"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="36dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout17">
-
-        <EditText
-            android:id="@+id/editTextNumberDecimal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:gravity="center"
-            android:hint="Gallinas"
-            android:inputType="numberDecimal"
-            android:textColor="@color/teal_200"
-            android:textColorHint="#77F2C12E"
-            android:textSize="20sp"
-            tools:ignore="SpeakableTextPresentCheck" />
-
-        <LinearLayout
-            android:layout_width="25dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal"></LinearLayout>
-
-        <EditText
-            android:id="@+id/editTextNumberDecimal2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:ems="10"
-            android:gravity="center"
-            android:hint="Pollos"
-            android:inputType="numberDecimal"
-            android:minHeight="48dp"
-            android:textColor="@color/teal_700"
-            android:textColorHint="#77EF5B2D"
-            android:textSize="20sp"
-            tools:ignore="SpeakableTextPresentCheck" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout20"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout18">
 
         <TextView
             android:id="@+id/textView27"
@@ -108,7 +60,7 @@
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName2"
+            android:id="@+id/observacionagpeul"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -118,19 +70,6 @@
             android:textSize="20sp"
             tools:ignore="SpeakableTextPresentCheck" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView25"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
-        android:text="Ahogados/Devoluciones"
-        android:textColor="@color/purple_500"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout18"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout17" />
 
     <LinearLayout
         android:id="@+id/linearLayout17"
@@ -228,11 +167,11 @@
         android:id="@+id/linearLayout21"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="24dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout22">
 
         <TextView
             android:id="@+id/textView26"
@@ -244,7 +183,7 @@
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/guiaetagpeul"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -252,6 +191,38 @@
             android:gravity="center"
             android:hint="Ejemplo: T001-10054"
             android:inputType="textPersonName"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout22"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="25dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Encargado:"
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/encargadotxtagpe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="Persona que recibió"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
             android:textSize="20sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
