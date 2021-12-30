@@ -43,11 +43,12 @@
         android:id="@+id/linearLayout20"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginTop="24dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout17">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout23">
 
         <TextView
             android:id="@+id/textView27"
@@ -88,7 +89,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Peso Real"
+            android:text="Gallos"
+            android:textColor="@android:color/holo_red_dark"
             android:textSize="20sp" />
 
         <TextView
@@ -97,7 +99,18 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="Peso real"
+            android:text="Pollo X"
+            android:textColor="@color/purple_200"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Pollo Y"
+            android:textColor="@color/ic_launcher_background"
             android:textSize="20sp" />
     </LinearLayout>
 
@@ -223,6 +236,44 @@
             android:hint="Persona que recibió"
             android:inputType="textPersonName"
             android:minHeight="48dp"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout23"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout17">
+
+        <TextView
+            android:id="@+id/textView25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Peso bruto"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Peso bruto"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView29"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Peso bruto"
             android:textSize="20sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
