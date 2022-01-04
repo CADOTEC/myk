@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,10 @@ public class ingresarpedidopro extends AppCompatActivity {
     private Button terminar;
     private CheckBox chpollos;
     private CheckBox chgallinas;
+    private CheckBox chotros;
+    private CheckBox chgallos;
+    private CheckBox chpollox;
+    private CheckBox chpolloy;
     private EditText peso;
     private EditText njaba;
     private EditText naves;
@@ -59,6 +64,37 @@ private int canp=0;
 
         chpollos=(CheckBox)findViewById(R.id.checkBoxpolloingprope);
         chgallinas=(CheckBox)findViewById(R.id.checkBoxgallinaingprope);
+     LinearLayout otroslayout=(LinearLayout)findViewById(R.id.esconderlayoutagpepro);
+
+        chotros=(CheckBox)findViewById(R.id.otroscbingpepro);
+        chgallos=(CheckBox)findViewById(R.id.chgalloingpepro);
+        chpollox=(CheckBox)findViewById(R.id.chpolloxingpepro);
+        chpolloy=(CheckBox)findViewById(R.id.chpolloyingpepro);
+        otroslayout.setVisibility(View.GONE);
+        chotros.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(chotros.isChecked()){
+                    otroslayout.setVisibility(View.VISIBLE);
+                }else{
+                    otroslayout.setVisibility(View.GONE);
+                }
+
+                /*chgallinas.setChecked(false);
+
+                peso.setLinkTextColor(Color.parseColor("#EF5B2D"));
+                peso.setHighlightColor(Color.parseColor("#EF5B2D"));
+                peso.setTextColor(Color.parseColor("#EF5B2D"));
+                njaba.setTextColor(Color.parseColor("#EF5B2D"));
+                naves.setTextColor(Color.parseColor("#EF5B2D"));
+                naves.setText("6");
+                if(chgallinas.isChecked()==false && chpollos.isChecked()==false){
+                    peso.setTextColor(Color.parseColor("#038C7F"));
+                    njaba.setTextColor(Color.parseColor("#038C7F"));
+                    naves.setTextColor(Color.parseColor("#038C7F"));
+                }*/
+            }
+        });
 
         chpollos.setOnClickListener(new View.OnClickListener() {
             @Override

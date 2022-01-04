@@ -331,7 +331,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <CheckBox
-            android:id="@+id/checkBox3"
+            android:id="@+id/chgalloingpepro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -343,7 +343,7 @@
             android:textSize="20sp" />
 
         <CheckBox
-            android:id="@+id/checkBox2"
+            android:id="@+id/chpolloxingpepro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -354,7 +354,7 @@
             android:textSize="20sp" />
 
         <CheckBox
-            android:id="@+id/checkBox"
+            android:id="@+id/chpolloyingpepro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

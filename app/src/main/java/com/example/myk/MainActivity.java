@@ -12,11 +12,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.mysql.jdbc.Connection;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     String gURL = "jdbc:mysql://";
@@ -42,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         ingresarbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ba="";
+               /* ba="";
                 ba=""+validar(usuario.getText().toString(),pass.getText().toString());
                 // Toast.makeText(getApplicationContext(), "Usuario o contraseña incorrectas."+b, Toast.LENGTH_SHORT).show();
 
@@ -56,13 +65,38 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     }
-                }
-
-
-
+                }*/
+ejecutarServicio("https://demo.e.cadotecperu.com/prueba/insertar.php");
 
             }
         });
+    }
+    private void ejecutarServicio(String URL){
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,
+                URL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Toast.makeText(getApplicationContext(), "EXITO", Toast.LENGTH_SHORT).show();
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+
+            }
+
+    }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> parametros=new HashMap<String,String>();
+                parametros.put("id","12");
+                parametros.put("nombre","34");
+                return parametros;
+            }
+        };
+        RequestQueue requestQueue= Volley.newRequestQueue(this);
+        requestQueue.add(stringRequest);
     }
     public String validar(String usuario,String contraseña){
         String bandera="";
