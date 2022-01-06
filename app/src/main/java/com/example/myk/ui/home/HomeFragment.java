@@ -1,9 +1,11 @@
 package com.example.myk.ui.home;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.SQLException;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myk.Adaptadorproveedores;
+import com.example.myk.MainActivity;
 import com.example.myk.R;
 import com.example.myk.claseproveedores;
 import com.example.myk.databinding.FragmentHomeBinding;
@@ -47,6 +50,7 @@ public class HomeFragment extends Fragment {
     String gUSR = "root";
     String gPSW = "6jlkhQAUDD7v6MlJomFm";
     String ba="";
+    private ProgressDialog progressDialog;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         homeViewModel =
@@ -61,16 +65,24 @@ public class HomeFragment extends Fragment {
         buscarpro = (Button) root.findViewById(R.id.buscarpro);
        // navUsername.setText(""+ Global.myVariable);
         llenarlistview();
+        progressDialog=new ProgressDialog(getContext());
 
+        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         buscarpro.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
+
+                progressDialog.show();
+                progressDialog.setContentView(R.layout.progress_dialog);
 if(buscarproveedorestxt.getText().toString().equals("")==false) {
     buscar(buscarproveedorestxt.getText().toString());
+    progressDialog.dismiss();
+
+
 }else{
     llenarlistview();
+    progressDialog.dismiss();
 }
-
 
 
             }
@@ -81,6 +93,10 @@ if(buscarproveedorestxt.getText().toString().equals("")==false) {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                progressDialog.show();
+                progressDialog.setContentView(R.layout.progress_dialog);
+               // progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
                 view.setBackgroundColor(Color.rgb(137,196,214));
                 claseproveedores selItem = (claseproveedores) listaproveedores.getItemAtPosition(position);
 
@@ -92,6 +108,7 @@ if(buscarproveedorestxt.getText().toString().equals("")==false) {
 
                 //  cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 // cdd.show();
+                Handler handler = new Handler(); handler.postDelayed(new Runnable() { public void run() { progressDialog.dismiss(); } }, 2000); // 3000 milliseconds delay
 
             }
         });
@@ -135,6 +152,7 @@ buscar(buscarproveedorestxt.getText().toString());
         });*/
         return root;
     }
+
     private void llenarlistview(){
         listaproveedores.setAdapter(null);
         ArrayList<claseproveedores> listacc=new ArrayList<claseproveedores>();

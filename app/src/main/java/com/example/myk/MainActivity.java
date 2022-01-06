@@ -2,9 +2,11 @@ package com.example.myk;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.SQLException;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
@@ -40,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     Button ingresarbtn;
     String usuariov="";
     String tipov="";
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,16 +51,22 @@ public class MainActivity extends AppCompatActivity {
         pass=(EditText)findViewById(R.id.password3);
         ingresarbtn=(Button)findViewById(R.id.ingresarbtn);
 
+        progressDialog=new ProgressDialog(MainActivity.this);
+        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         ingresarbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* ba="";
+progressDialog.show();
+progressDialog.setContentView(R.layout.progress_dialog);
+
+                ba="";
                 ba=""+validar(usuario.getText().toString(),pass.getText().toString());
                 // Toast.makeText(getApplicationContext(), "Usuario o contraseña incorrectas."+b, Toast.LENGTH_SHORT).show();
 
                 if(ba.equals("0")){
-                    Toast.makeText(getApplicationContext(), "Usuario o contraseña incorrectas.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "Usuario o contraseña incorrectas.", Toast.LENGTH_SHORT).show();
                     Global.myVariable="";
+                    progressDialog.dismiss();
                 }else{
                     if(ba.equals("1")){
                         Toast.makeText(getApplicationContext(), "Bienvenido "+usuariov, Toast.LENGTH_SHORT).show();
@@ -65,12 +74,17 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         finish();
                     }
-                }*/
-ejecutarServicio("https://demo.e.cadotecperu.com/prueba/insertar.php");
+                }
+//ejecutarServicio("https://demo.e.cadotecperu.com/prueba/insertar.php");
+                Handler handler = new Handler(); handler.postDelayed(new Runnable() { public void run() { progressDialog.dismiss(); } }, 2000); // 3000 milliseconds delay
 
             }
         });
     }
+
+/*public void onBackPressed(){
+        progressDialog.dismiss();
+}*/
     private void ejecutarServicio(String URL){
         StringRequest stringRequest=new StringRequest(Request.Method.POST,
                 URL,
