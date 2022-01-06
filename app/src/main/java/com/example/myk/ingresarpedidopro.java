@@ -2,14 +2,17 @@ package com.example.myk;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.SQLException;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -65,7 +68,7 @@ private int canp=0;
     String gDATABASE = "myk";
     String gUSR = "root";
     String gPSW = "6jlkhQAUDD7v6MlJomFm";
-
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +88,9 @@ private int canp=0;
         chpollos=(CheckBox)findViewById(R.id.checkBoxpolloingprope);
         chgallinas=(CheckBox)findViewById(R.id.checkBoxgallinaingprope);
      LinearLayout otroslayout=(LinearLayout)findViewById(R.id.esconderlayoutagpepro);
+        progressDialog=new ProgressDialog(ingresarpedidopro.this);
 
+        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         chotros=(CheckBox)findViewById(R.id.otroscbingpepro);
         chgallos=(CheckBox)findViewById(R.id.chgalloingpepro);
         chpollox=(CheckBox)findViewById(R.id.chpolloxingpepro);
@@ -323,6 +328,30 @@ private int canp=0;
             }
         });
         //FIN pasar al sioguiente activity, boton terminar
+
+        //seleccionar elemento de la lista
+        listapesadas.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                progressDialog.show();
+                progressDialog.setContentView(R.layout.progress_dialog);
+                view.setBackgroundColor(Color.WHITE);
+                clasepesadas selItem = (clasepesadas) listapesadas.getItemAtPosition(position);
+
+                Intent intent=new Intent(ingresarpedidopro.this, detallepesadalista.class);
+                intent.putExtra("DATO", ""+selItem.getId());
+                startActivity(intent);
+                //finish();
+                // CustomDialogClass cdd = new CustomDialogClass(numeros.this,""+selItem.getCantidad(),""+selItem.getId(),listanumeros,"Cantidad");
+
+                //  cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                // cdd.show();
+                Handler handler = new Handler(); handler.postDelayed(new Runnable() { public void run() { progressDialog.dismiss(); } }, 2000); // 3000 milliseconds delay
+
+            }
+        });
+        //FIN seleccionar elementop de la lista
     }
 
     //llenar  listview de pesadas

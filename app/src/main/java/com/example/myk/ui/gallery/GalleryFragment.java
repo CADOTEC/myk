@@ -28,7 +28,6 @@ public class GalleryFragment extends Fragment {
         ubicacionf.myVariable2="CLIENTES";
         binding = FragmentGalleryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
-
         final TextView textView = binding.textGallery;
         galleryViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override

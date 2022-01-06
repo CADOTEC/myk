@@ -50,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         usuario=(EditText)findViewById(R.id.username4);
         pass=(EditText)findViewById(R.id.password3);
         ingresarbtn=(Button)findViewById(R.id.ingresarbtn);
-
         progressDialog=new ProgressDialog(MainActivity.this);
         progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         ingresarbtn.setOnClickListener(new View.OnClickListener() {
@@ -141,6 +140,7 @@ progressDialog.setContentView(R.layout.progress_dialog);
     }
     public Connection CONN()
     {
+
         final String class_jdbc = "com.mysql.jdbc.Driver";
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
@@ -160,28 +160,6 @@ progressDialog.setContentView(R.layout.progress_dialog);
         return conn;
     }
 
-    private String Query_Version()
-    {
-        String response = "";
 
-        try {
-            Connection ConnexionMySQL = CONN();
-            Statement st = ConnexionMySQL.createStatement();
-
-            ResultSet rs = st.executeQuery("SELECT nombresyapellidos from usuarios");
-            //ResultSet rs = st.executeQuery("SHOW VARIABLES LIKE \"%version%\"");
-
-            while (rs.next()) {
-                response += rs.getString(1) + "\r\n";
-            }
-            rs.close();
-            ConnexionMySQL.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }
-        return response;
-    }
 
 }

@@ -31,13 +31,15 @@
         <entry key="..\:/Users/CADOTEC/StudioProjects/myk/app/src/main/res/layout/viewpe.xml" value="0.19242610837438423" />
         <entry key="..\:/Users/CADOTEC/StudioProjects/myk/app/src/main/res/layout/viewpro.xml" value="0.5" />
         <entry key="..\:/Users/alfre/StudioProjects/myk/app/src/main/res/drawable/bg_round.xml" value="0.202734375" />
-        <entry key="..\:/Users/alfre/StudioProjects/myk/app/src/main/res/layout-sw600dp/activity_ingresarpedidopro.xml" value="0.283203125" />
+        <entry key="..\:/Users/alfre/StudioProjects/myk/app/src/main/res/layout-sw600dp/activity_ingresarpedidopro.xml" value="0.4" />
+        <entry key="..\:/Users/alfre/StudioProjects/myk/app/src/main/res/layout-sw600dp/viewpesadas.xml" value="0.283203125" />
         <entry key="..\:/Users/alfre/StudioProjects/myk/app/src/main/res/layout/activity_agregarpedidoultimo.xml" value="0.20185185185185187" />
         <entry key="..\:/Users/alfre/StudioProjects/myk/app/src/main/res/layout/activity_agregarproveedores.xml" value="0.6" />
-        <entry key="..\:/Users/alfre/StudioProjects/myk/app/src/main/res/layout/activity_ingresarpedidopro.xml" value="0.176" />
+        <entry key="..\:/Users/alfre/StudioProjects/myk/app/src/main/res/layout/activity_detallepesadalista.xml" value="0.536" />
+        <entry key="..\:/Users/alfre/StudioProjects/myk/app/src/main/res/layout/activity_ingresarpedidopro.xml" value="0.264" />
         <entry key="..\:/Users/alfre/StudioProjects/myk/app/src/main/res/layout/activity_main.xml" value="0.4" />
         <entry key="..\:/Users/alfre/StudioProjects/myk/app/src/main/res/layout/progress_dialog.xml" value="0.8" />
-        <entry key="..\:/Users/alfre/StudioProjects/myk/app/src/main/res/layout/viewpesadas.xml" value="0.536" />
+        <entry key="..\:/Users/alfre/StudioProjects/myk/app/src/main/res/layout/viewpesadas.xml" value="0.2" />
         <entry key="..\:/app/myk/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.16328125" />
         <entry key="..\:/app/myk/app/src/main/res/drawable/side_nav_bar.xml" value="0.16328125" />
         <entry key="..\:/app/myk/app/src/main/res/layout-sw600dp/fragment_home.xml" value="0.15390625" />
