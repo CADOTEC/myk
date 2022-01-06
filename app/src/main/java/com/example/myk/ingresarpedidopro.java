@@ -99,6 +99,7 @@ private int canp=0;
         gallotxt.setVisibility(View.GONE);
         polloxtxt.setVisibility(View.GONE);
         polloytxt.setVisibility(View.GONE);
+        llenarlistview();
         //mostrar ocultar al presionar checkbox otros
         chotros.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -229,58 +230,124 @@ private int canp=0;
             public void onClick(View v) {
                 if (peso.getText().toString().equals("")==false && naves.getText().toString().equals("")==false && njaba.getText().toString().equals("")==false) {
                     double tem=0;
-
                     if (chgallinas.isChecked()) {
-
-
                         insertarpesada("GALLINA",""+peso.getText().toString(),""+njaba.getText().toString(),""+naves.getText().toString());
 
+                        try {
+                            Connection ConnexionMySQL = CONN();
+                            Statement st = ConnexionMySQL.createStatement();
+
+                            ResultSet rs = st.executeQuery("SELECT SUM(peso) FROM detallepesada WHERE idcompra=0 AND gallinaopollo='GALLINA'");
 
 
-                        tem=Double.parseDouble(""+peso.getText().toString());
-                        jg=jg+(Double.parseDouble(""+njaba.getText().toString()));
-                        g = g + tem;
-                        cg=cg+Double.parseDouble(""+naves.getText().toString());
-                        gallinastxt.setText("" + g);
+                            while (rs.next()) {
+                                //bandera += rs.getString(1);
+                                gallinastxt.setText(""+rs.getString(1));
+                                g=(Double)Double.parseDouble(rs.getString(1));
+                            }
+                            rs.close();
+                            ConnexionMySQL.close();
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+
+                        }
                         peso.setText("");
+
                     }else{
                     if (chpollos.isChecked()) {
 
                         insertarpesada("POLLO",""+peso.getText().toString(),""+njaba.getText().toString(),""+naves.getText().toString());
-                        tem=Double.parseDouble(""+peso.getText().toString());
-                        p = p + tem;
-                        jp=jp+(Double.parseDouble(""+njaba.getText().toString()));
-                        pollostxt.setText("" + p);
-                        cp=cp+Double.parseDouble(""+naves.getText().toString());
+                        try {
+                            Connection ConnexionMySQL = CONN();
+                            Statement st = ConnexionMySQL.createStatement();
+
+                            ResultSet rs = st.executeQuery("SELECT SUM(peso) FROM detallepesada WHERE idcompra=0 AND gallinaopollo='POLLO'");
+
+
+                            while (rs.next()) {
+                                //bandera += rs.getString(1);
+                                pollostxt.setText(""+rs.getString(1));
+                                p=(Double)Double.parseDouble(rs.getString(1));
+                            }
+                            rs.close();
+                            ConnexionMySQL.close();
+
+                        } catch (Exception e) {
+                            e.printStackTrace();
+
+                        }
                         peso.setText("");
                     }else{
                         if (chgallos.isChecked()) {
 
                             insertarpesada("GALLO",""+peso.getText().toString(),""+njaba.getText().toString(),""+naves.getText().toString());
-                            tem=Double.parseDouble(""+peso.getText().toString());
-                            go = go + tem;
-                            jgo=jgo+(Double.parseDouble(""+njaba.getText().toString()));
-                            gallotxt.setText("" + go);
-                            cgo=cgo+Double.parseDouble(""+naves.getText().toString());
+                            try {
+                                Connection ConnexionMySQL = CONN();
+                                Statement st = ConnexionMySQL.createStatement();
+
+                                ResultSet rs = st.executeQuery("SELECT SUM(peso) FROM detallepesada WHERE idcompra=0 AND gallinaopollo='GALLO'");
+
+
+                                while (rs.next()) {
+                                    //bandera += rs.getString(1);
+                                    gallotxt.setText(""+rs.getString(1));
+                                    go=(Double)Double.parseDouble(rs.getString(1));
+                                }
+                                rs.close();
+                                ConnexionMySQL.close();
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+
+                            }
                             peso.setText("");
                         }else {
                             if (chpollox.isChecked()) {
 
                                 insertarpesada("POLLO X",""+peso.getText().toString(),""+njaba.getText().toString(),""+naves.getText().toString());
-                                tem=Double.parseDouble(""+peso.getText().toString());
-                                px = px + tem;
-                                jpx=jpx+(Double.parseDouble(""+njaba.getText().toString()));
-                                polloxtxt.setText("" + px);
-                                cpx=cpx+Double.parseDouble(""+naves.getText().toString());
+                                try {
+                                    Connection ConnexionMySQL = CONN();
+                                    Statement st = ConnexionMySQL.createStatement();
+
+                                    ResultSet rs = st.executeQuery("SELECT SUM(peso) FROM detallepesada WHERE idcompra=0 AND gallinaopollo='POLLO X'");
+
+
+                                    while (rs.next()) {
+                                        //bandera += rs.getString(1);
+                                        polloxtxt.setText(""+rs.getString(1));
+                                        px=(Double)Double.parseDouble(rs.getString(1));
+                                    }
+                                    rs.close();
+                                    ConnexionMySQL.close();
+
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+
+                                }
                                 peso.setText("");
                             }else {
                                 if (chpolloy.isChecked()) {
                                     insertarpesada("POLLO Y",""+peso.getText().toString(),""+njaba.getText().toString(),""+naves.getText().toString());
-                                    tem=Double.parseDouble(""+peso.getText().toString());
-                                    py = py + tem;
-                                    jpy=jpy+(Double.parseDouble(""+njaba.getText().toString()));
-                                    polloytxt.setText("" + py);
-                                    cpy=cpy+Double.parseDouble(""+naves.getText().toString());
+                                    try {
+                                        Connection ConnexionMySQL = CONN();
+                                        Statement st = ConnexionMySQL.createStatement();
+
+                                        ResultSet rs = st.executeQuery("SELECT SUM(peso) FROM detallepesada WHERE idcompra=0 AND gallinaopollo='POLLO Y'");
+
+
+                                        while (rs.next()) {
+                                            //bandera += rs.getString(1);
+                                            polloytxt.setText(""+rs.getString(1));
+                                            py=(Double)Double.parseDouble(rs.getString(1));
+                                        }
+                                        rs.close();
+                                        ConnexionMySQL.close();
+
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+
+                                    }
                                     peso.setText("");
                                 }else {
                                     Toast.makeText(getApplicationContext(), "DEBE SELECCIONAR ENTRE POLLO, GALLINA U OTROS", Toast.LENGTH_SHORT).show();
@@ -303,10 +370,7 @@ private int canp=0;
         terminar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
-
-                if(g>0||p>0){
+                if(g>0||p>0||go>0||px>0||py>0){
 
                     insertar(""+g,""+p,""+jg,""+jp,""+cg,""+cp,"","","");
 
@@ -365,11 +429,19 @@ private int canp=0;
             Statement st = ConnexionMySQL.createStatement();
 
             ResultSet rs = st.executeQuery("Select * from detallepesada where idcompra=0");
-
-
             while (rs.next()) {
                 //bandera += rs.getString(1);
                 listacc.add(new clasepesadas(R.drawable.pesada,rs.getString(1),rs.getString(3),rs.getString(4)+"KG",rs.getString(5),rs.getString(6)));
+            }
+            rs.close();
+
+            rs = st.executeQuery("SELECT SUM(POLLOX.peso),SUM(POLLOY.peso),SUM(POLLO.peso),SUM(GALLINA.peso),SUM(GALLO.peso) FROM detallepesada AS POLLOX,detallepesada AS POLLOY ,detallepesada AS POLLO,detallepesada AS GALLO,detallepesada AS GALLINA WHERE POLLOX.idcompra=0 AND POLLOY.idcompra=0 AND POLLO.idcompra=0 AND GALLO.idcompra=0 AND GALLINA.idcompra=0 AND POLLOX.gallinaopollo='POLLO X' AND POLLOY.gallinaopollo='POLLO Y' AND POLLO.gallinaopollo='POLLO' AND GALLINA.gallinaopollo='GALLINA' AND GALLO.gallinaopollo='GALLO'");
+            while (rs.next()) {
+                polloxtxt.setText(rs.getString(1));
+                polloytxt.setText(rs.getString(2));
+                pollostxt.setText(rs.getString(3));
+                gallinastxt.setText(rs.getString(4));
+                gallotxt.setText(rs.getString(5));
             }
             rs.close();
             ConnexionMySQL.close();

@@ -2,6 +2,7 @@ package com.example.myk;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.SQLException;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.mysql.jdbc.Connection;
 
@@ -153,9 +155,82 @@ public class detallepesadalista extends AppCompatActivity {
                 }
             }
         });
+        eliminar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+eliminar(idd);
+            }
+        });
+        actualizar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String tipo="";
+                if(gallina.isChecked()){
+                  tipo="GALLINA";
+                }
+                if(pollo.isChecked()){
+                    tipo="POLLO";
+                }
+                if(pollox.isChecked()){
+                    tipo="POLLO X";
+                }
+                if(polloy.isChecked()){
+                    tipo="POLLO Y";
+                }
+                if(gallo.isChecked()){
+                    tipo="GALLO";
+                }
+
+
+                actualizar(idd,tipo,peso.getText().toString(),njabas.getText().toString(),naves.getText().toString());
+
+            }
+        });
+    }
+
+    //eliminar
+    private void eliminar(String id){
+
+        try {
+            Connection ConnexionMySQL = CONN();
+            Statement st = ConnexionMySQL.createStatement();
+
+            st.executeUpdate("DELETE FROM detallepesada WHERE id="+id);
+
+            ConnexionMySQL.close();
+            Toast.makeText(getApplicationContext(), "Eliminado!", Toast.LENGTH_SHORT).show();
+            Intent intent=new Intent(detallepesadalista.this, ingresarpedidopro.class);
+            startActivity(intent);
+            finish();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
+    }
+//actualizar
+private void actualizar(String id,String gallinaopollo,String peso,String njabas,String naves){
+
+    try {
+        Connection ConnexionMySQL = CONN();
+        Statement st = ConnexionMySQL.createStatement();
+
+        st.executeUpdate("UPDATE detallepesada SET gallinaopollo='"+gallinaopollo+"',peso='"+peso+"',cantidaddejabas='"+njabas+"',cantidaddeaves='"+naves+"' WHERE id="+id);
+
+        ConnexionMySQL.close();
+        Toast.makeText(getApplicationContext(), "EDITADO!", Toast.LENGTH_SHORT).show();
+        Intent intent=new Intent(detallepesadalista.this, ingresarpedidopro.class);
+        startActivity(intent);
+        finish();
+
+    } catch (Exception e) {
+        e.printStackTrace();
 
     }
 
+}
     //llenar datos
     private void llenarlistview(String id){
 
