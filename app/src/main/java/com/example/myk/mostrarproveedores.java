@@ -2,8 +2,10 @@ package com.example.myk;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.SQLException;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -43,6 +45,8 @@ public class mostrarproveedores extends AppCompatActivity {
     TextView telefono2txt;
     TextView correotxt;
     Button ingresarbtn;
+    private String id="";
+    private ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,19 +59,89 @@ public class mostrarproveedores extends AppCompatActivity {
         telefono2txt = (TextView) findViewById(R.id.telefono2protxt);
         correotxt = (TextView) findViewById(R.id.correoprotxt);
         ingresarbtn = (Button) findViewById(R.id.ingresarpedidorebtn);
-        String id=getIntent().getExtras().getString("DATO");
-        buscar(id);
-
+         id=getIntent().getExtras().getString("DATO");
+      //  buscar(id);
+new task1().execute();
 
         ingresarbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(mostrarproveedores.this,ingresarpedidopro.class);
+                intent.putExtra("idproveedor", ""+getIntent().getExtras().getString("DATO"));
                 startActivity(intent);
                 finish();
             }
         });
     }
+
+
+    private class task1 extends AsyncTask<Void, Integer, claseproveedorescompleto>  {
+        @Override
+        protected void onPreExecute() {
+            progressDialog=new ProgressDialog(mostrarproveedores.this);
+            progressDialog.show();
+            progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+            progressDialog.setContentView(R.layout.progress_dialog);
+        }
+
+        @Override
+        protected claseproveedorescompleto doInBackground(Void... params) {
+            claseproveedorescompleto c=new claseproveedorescompleto();
+            String telefono1="",telefono2="",correoin="";
+            try {
+                Connection ConnexionMySQL = CONN();
+                Statement st = ConnexionMySQL.createStatement();
+
+                ResultSet rs = st.executeQuery("Select * from proveedores where id='"+id+"'");
+                while (rs.next()) {
+
+                    if(rs.getString(6)==null){
+                        telefono1="Sin teléfono";
+                    }else{
+                        telefono1=""+rs.getString(6);
+                    }
+
+                    if(rs.getString(7)==null){
+                        telefono2="Sin teléfono";
+                    }else{
+                        telefono2=""+rs.getString(7);
+                    }
+                    if(rs.getString(8)==null){
+                        correoin="Sin correo";
+                    }else{
+                        correoin=""+rs.getString(8);
+                    }
+                    c=new claseproveedorescompleto(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),telefono1,telefono2,correoin);
+
+                }
+                rs.close();
+                ConnexionMySQL.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
+            return c;
+        }
+
+
+
+        @Override
+        protected void onPostExecute(claseproveedorescompleto s) {
+            direcciontxt.setText(""+s.getDireccion());
+            nombretxt.setText(""+s.getNombre());
+            dnioructxt.setText(""+s.getDnioruc());
+
+            estadotxt.setText(""+s.getEstado());
+            telefono1txt.setText(""+s.getTelefono1());
+          telefono2txt.setText(""+s.getTelefono2());
+            correotxt.setText(""+s.getCorreo());
+            progressDialog.dismiss();
+
+            }
+        }
+
+
     private void buscar(String nombre){
 
         try {
@@ -75,17 +149,14 @@ public class mostrarproveedores extends AppCompatActivity {
             Statement st = ConnexionMySQL.createStatement();
 
             ResultSet rs = st.executeQuery("Select * from proveedores where id='"+nombre+"'");
-
-
             while (rs.next()) {
-                //bandera += rs.getString(4);
-                nombre=""+rs.getString(4);
-                 dniorucs=""+rs.getString(2);
-                 direccion=""+rs.getString(3);
-                 estado=""+rs.getString(5);
-                telefono1=""+rs.getString(6);
-                telefono2=""+rs.getString(7);
-                correo=""+rs.getString(8);
+                nombretxt.setText(""+rs.getString(4));
+                dnioructxt.setText(""+rs.getString(2));
+                direcciontxt.setText(""+rs.getString(3));
+                estadotxt.setText(""+rs.getString(5));
+                telefono1txt.setText(""+rs.getString(6));
+                if(rs.getString(7).equals("null")){telefono2txt.setText("Sin teléfono 2");}else{telefono2txt.setText(""+rs.getString(7));}
+                correotxt.setText(""+rs.getString(8));
             }
             rs.close();
             ConnexionMySQL.close();
@@ -95,14 +166,7 @@ public class mostrarproveedores extends AppCompatActivity {
 
         }
 
-        nombretxt.setText(""+nombre);
-        dnioructxt.setText(""+dniorucs);
-        direcciontxt.setText(""+direccion);
-        estadotxt.setText(""+estado);
-        telefono1txt.setText(""+telefono1);
-        if(telefono2.equals("null")){telefono2txt.setText("Sin teléfono 2");}else{telefono2txt.setText(""+telefono2);}
 
-        correotxt.setText(""+correo);
 
 
     }

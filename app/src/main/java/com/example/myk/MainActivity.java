@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.SQLException;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
@@ -50,74 +51,65 @@ public class MainActivity extends AppCompatActivity {
         usuario=(EditText)findViewById(R.id.username4);
         pass=(EditText)findViewById(R.id.password3);
         ingresarbtn=(Button)findViewById(R.id.ingresarbtn);
-        progressDialog=new ProgressDialog(MainActivity.this);
-        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
         ingresarbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-progressDialog.show();
-progressDialog.setContentView(R.layout.progress_dialog);
-
-                ba="";
-                ba=""+validar(usuario.getText().toString(),pass.getText().toString());
-                // Toast.makeText(getApplicationContext(), "Usuario o contraseña incorrectas."+b, Toast.LENGTH_SHORT).show();
-
-                if(ba.equals("0")){
-                    Toast.makeText(MainActivity.this, "Usuario o contraseña incorrectas.", Toast.LENGTH_SHORT).show();
-                    Global.myVariable="";
-                    progressDialog.dismiss();
-                }else{
-                    if(ba.equals("1")){
-                        Toast.makeText(getApplicationContext(), "Bienvenido "+usuariov, Toast.LENGTH_SHORT).show();
-                        Intent intent=new Intent(MainActivity.this,Principal2Activity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                }
-//ejecutarServicio("https://demo.e.cadotecperu.com/prueba/insertar.php");
-                Handler handler = new Handler(); handler.postDelayed(new Runnable() { public void run() { progressDialog.dismiss(); } }, 2000); // 3000 milliseconds delay
+                new task1().execute("hola");
 
             }
         });
     }
 
-/*public void onBackPressed(){
-        progressDialog.dismiss();
-}*/
-    private void ejecutarServicio(String URL){
-        StringRequest stringRequest=new StringRequest(Request.Method.POST,
-                URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(getApplicationContext(), "EXITO", Toast.LENGTH_SHORT).show();
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
 
-            }
+    private class task1 extends AsyncTask<String, Void, String> {
+        @Override
+        protected void onPreExecute() {
+            progressDialog=new ProgressDialog(MainActivity.this);
+            progressDialog.show();
+            progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+            progressDialog.setContentView(R.layout.progressvalidar);
+        }
 
-    }){
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> parametros=new HashMap<String,String>();
-                parametros.put("id","12");
-                parametros.put("nombre","34");
-                return parametros;
+        @Override
+        protected String doInBackground(String... strings) {
+            ba="";
+            ba=""+validar(usuario.getText().toString(),pass.getText().toString());
+            if(ba.equals("1")){
+
+                Intent intent=new Intent(MainActivity.this,Principal2Activity.class);
+                startActivity(intent);
+                finish();
             }
-        };
-        RequestQueue requestQueue= Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
+            return strings[0];
+        }
+
+
+
+        @Override
+        protected void onPostExecute(String s) {
+            progressDialog.dismiss();
+            if(ba.equals("0")){
+                Toast.makeText(MainActivity.this, "Usuario o contraseña incorrectas.", Toast.LENGTH_SHORT).show();
+                Global.myVariable="";
+
+            }else{
+                if(ba.equals("1")){
+                    Toast.makeText(getApplicationContext(), "Bienvenido "+usuariov, Toast.LENGTH_SHORT).show();
+                }
+            }
+        }
     }
+
+
+
     public String validar(String usuario,String contraseña){
         String bandera="";
         try {
             Connection ConnexionMySQL = CONN();
             Statement st = ConnexionMySQL.createStatement();
 
-            ResultSet rs = st.executeQuery("SELECT count(*),nombresyapellidos from usuarios WHERE dni like '"+usuario+"' and pass like '"+contraseña+"'");
+            ResultSet rs = st.executeQuery("SELECT count(*),nombresyapellidos,tipo from usuarios WHERE dni like '"+usuario+"' and pass like '"+contraseña+"'");
             Global.myVariable="";
 
             while (rs.next()) {

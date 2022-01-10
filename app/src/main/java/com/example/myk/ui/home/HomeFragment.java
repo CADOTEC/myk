@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.SQLException;
 import android.graphics.Color;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
@@ -23,7 +24,9 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.myk.Adaptadorproveedores;
+import com.example.myk.Global;
 import com.example.myk.MainActivity;
+import com.example.myk.Principal2Activity;
 import com.example.myk.R;
 import com.example.myk.claseproveedores;
 import com.example.myk.databinding.FragmentHomeBinding;
@@ -60,28 +63,27 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
         ubicacionf.myVariable2="PROVEEDORES";
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("Proveedores");
-        buscarproveedorestxt = (EditText) root.findViewById(R.id.txtbuscarproveedores);
+        buscarproveedorestxt =(EditText) root.findViewById(R.id.txtbuscarproveedores);
         listaproveedores = (ListView) root.findViewById(R.id.listaproveedores);
         buscarpro = (Button) root.findViewById(R.id.buscarpro);
        // navUsername.setText(""+ Global.myVariable);
         llenarlistview();
-        progressDialog=new ProgressDialog(getContext());
 
-        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+
         buscarpro.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-
-                progressDialog.show();
-                progressDialog.setContentView(R.layout.progress_dialog);
 if(buscarproveedorestxt.getText().toString().equals("")==false) {
-    buscar(buscarproveedorestxt.getText().toString());
-    progressDialog.dismiss();
+    listaproveedores.setAdapter(null);
+new task1().execute();
+
+Toast.makeText(getContext(), "Resultados para: "+buscarproveedorestxt.getText().toString() , Toast.LENGTH_SHORT).show();
 
 
 }else{
-    llenarlistview();
-    progressDialog.dismiss();
+    listaproveedores.setAdapter(null);
+  new task2().execute();
 }
 
 
@@ -93,64 +95,83 @@ if(buscarproveedorestxt.getText().toString().equals("")==false) {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                progressDialog.show();
-                progressDialog.setContentView(R.layout.progress_dialog);
                // progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-
                 view.setBackgroundColor(Color.rgb(137,196,214));
                 claseproveedores selItem = (claseproveedores) listaproveedores.getItemAtPosition(position);
-
                 Intent intent=new Intent(getContext(), mostrarproveedores.class);
                 intent.putExtra("DATO", ""+selItem.getId());
                 startActivity(intent);
 
-                // CustomDialogClass cdd = new CustomDialogClass(numeros.this,""+selItem.getCantidad(),""+selItem.getId(),listanumeros,"Cantidad");
-
-                //  cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                // cdd.show();
-                Handler handler = new Handler(); handler.postDelayed(new Runnable() { public void run() { progressDialog.dismiss(); } }, 2000); // 3000 milliseconds delay
-
             }
         });
-       /* buscarproveedorestxt.addTextChangedListener(new TextWatcher() {
-
-            @Override
-            public void afterTextChanged(Editable s) {}
-
-            @Override
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-                if (s.length() != 0) {
-
-
-buscar(buscarproveedorestxt.getText().toString());
-
-                  //  Adaptador adaptador = new Adaptador(precios.this, bd.buscarprecio(buscarpreciotxt.getText().toString()));
-                    //listaprecios.setAdapter(adaptador);
-
-                }else{
-                   // llenarlistview();
-                }
-
-            }
-
-
-        });
-*/
-
-       /* final TextView textView = binding.textHome;
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });*/
         return root;
+    }
+    private class task1 extends AsyncTask< Void,Integer, ArrayList<claseproveedores>> {
+        @Override
+        protected void onPreExecute() {
+            progressDialog=new ProgressDialog(getContext());
+            progressDialog.show();
+            progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+            progressDialog.setContentView(R.layout.progressbuscar);
+        }
+
+        @Override
+        protected ArrayList<claseproveedores> doInBackground(Void... params) {
+
+            ArrayList<claseproveedores> listacc=new ArrayList<claseproveedores>();
+
+            listacc=buscar(buscarproveedorestxt.getText().toString());
+
+            return listacc;
+        }
+        @Override
+        protected void onPostExecute( ArrayList<claseproveedores> s) {
+            Adaptadorproveedores adaptadorpro=new Adaptadorproveedores(getContext(),s);
+            listaproveedores.setAdapter(adaptadorpro);
+            progressDialog.dismiss();
+
+        }
+    }
+
+    private class task2 extends AsyncTask<Void,Integer, ArrayList<claseproveedores>> {
+        @Override
+        protected void onPreExecute() {
+            progressDialog=new ProgressDialog(getContext());
+            progressDialog.show();
+            progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+            progressDialog.setContentView(R.layout.progressbuscar);
+        }
+
+        @Override
+        protected ArrayList<claseproveedores> doInBackground(Void... params) {
+
+            ArrayList<claseproveedores> listacc=new ArrayList<claseproveedores>();
+            try {
+                Connection ConnexionMySQL = CONN();
+                Statement st = ConnexionMySQL.createStatement();
+
+                ResultSet rs = st.executeQuery("Select * from proveedores");
+
+                while (rs.next()) {
+                    //bandera += rs.getString(1);
+                    listacc.add(new claseproveedores(R.drawable.imgpro,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)));
+                }
+                rs.close();
+                ConnexionMySQL.close();
+
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
+
+            return listacc;
+        }
+        @Override
+        protected void onPostExecute(ArrayList<claseproveedores> s) {
+            progressDialog.dismiss();
+            Adaptadorproveedores adaptadorpro=new Adaptadorproveedores(getContext(),s);
+            listaproveedores.setAdapter(adaptadorpro);
+        }
     }
 
     private void llenarlistview(){
@@ -163,7 +184,6 @@ buscar(buscarproveedorestxt.getText().toString());
             Statement st = ConnexionMySQL.createStatement();
 
             ResultSet rs = st.executeQuery("Select * from proveedores");
-
 
             while (rs.next()) {
                 //bandera += rs.getString(1);
@@ -181,8 +201,8 @@ buscar(buscarproveedorestxt.getText().toString());
         Adaptadorproveedores adaptadorpro=new Adaptadorproveedores(getContext(),listacc);
         listaproveedores.setAdapter(adaptadorpro);
     }
-    private void buscar(String nombre){
-        listaproveedores.setAdapter(null);
+    private ArrayList<claseproveedores> buscar(String nombre){
+
         ArrayList<claseproveedores> listacc=new ArrayList<claseproveedores>();
 
 
@@ -204,12 +224,7 @@ buscar(buscarproveedorestxt.getText().toString());
             e.printStackTrace();
 
         }
-
-
-        Adaptadorproveedores adaptadorpro=new Adaptadorproveedores(getContext(),listacc);
-        listaproveedores.setAdapter(adaptadorpro);
-        Toast.makeText(getContext(), "Resultados para: "+nombre , Toast.LENGTH_SHORT).show();
-
+return listacc;
     }
     public Connection CONN()
     {

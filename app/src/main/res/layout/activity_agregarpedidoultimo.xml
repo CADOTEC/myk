@@ -23,7 +23,7 @@
             android:orientation="horizontal"></LinearLayout>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/guardarbtnagpeul"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -227,7 +227,7 @@
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/encargadotxtagpe"
+            android:id="@+id/encargadotxtagpeul"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -250,7 +250,7 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout17">
 
         <TextView
-            android:id="@+id/textView25"
+            android:id="@+id/pesobrutogalloagpeul"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -259,7 +259,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/textView28"
+            android:id="@+id/pesobrutopolloxagpeul"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -268,7 +268,7 @@
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/textView29"
+            android:id="@+id/pesobrutopolloyagpeul"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
