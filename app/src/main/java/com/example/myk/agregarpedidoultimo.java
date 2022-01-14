@@ -216,7 +216,7 @@ private void actualizarpesadas(){
             Connection ConnexionMySQL = CONN();
             Statement st = ConnexionMySQL.createStatement();
 
-            ResultSet rs = st.executeQuery("SELECT idproveedor FROM compras WHERE fecha='"+fecha+"' AND idproveedor='"+idpro+"'");
+            ResultSet rs = st.executeQuery("SELECT id FROM compras WHERE fecha='"+fecha+"' AND idproveedor='"+idpro+"'");
 
 
             while (rs.next()) {

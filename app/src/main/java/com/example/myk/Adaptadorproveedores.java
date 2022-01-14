@@ -59,11 +59,11 @@ public class Adaptadorproveedores implements ListAdapter {
         claseproveedores item=(claseproveedores) getItem(position);
 
         convertView= LayoutInflater.from(context).inflate(R.layout.viewpro,null);
-        ImageView imgfoto=(ImageView)convertView.findViewById(R.id.imgv);
-        TextView id=(TextView)convertView.findViewById(R.id.idtxt);
+        ImageView imgfoto=(ImageView)convertView.findViewById(R.id.imgvpro);
+        TextView id=(TextView)convertView.findViewById(R.id.idtxtpro);
         TextView dnioruc=(TextView)convertView.findViewById(R.id.dnioructxt);
-        TextView nombre=(TextView)convertView.findViewById(R.id.nombretxt);
-        TextView estado=(TextView)convertView.findViewById(R.id.estadotxt);
+        TextView nombre=(TextView)convertView.findViewById(R.id.nombretxtpro);
+        TextView estado=(TextView)convertView.findViewById(R.id.festadotxtpro);
 
 
         imgfoto.setImageResource(item.getImg());

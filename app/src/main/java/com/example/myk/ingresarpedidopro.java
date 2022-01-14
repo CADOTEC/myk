@@ -122,7 +122,7 @@ public class ingresarpedidopro extends AppCompatActivity {
         });
         //fin mostrar ocultar al presionar checkbox otros
 
-        //inicializar checkbox
+        //inicializar checkboxlistapesadasingpepro
         chpollos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

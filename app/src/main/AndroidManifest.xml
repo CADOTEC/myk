@@ -12,6 +12,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
         <activity
+            android:name=".listadetallepesadas"
+            android:exported="false" />
+        <activity
+            android:name=".detallelistacompras"
+            android:exported="false" />
+        <activity
+            android:name=".mostrarcompras"
+            android:exported="false"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity
             android:name=".detallepesadalista"
             android:exported="false" />
         <activity

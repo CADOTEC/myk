@@ -45,6 +45,7 @@ public class mostrarproveedores extends AppCompatActivity {
     TextView telefono2txt;
     TextView correotxt;
     Button ingresarbtn;
+    Button mostrarcompra;
     private String id="";
     private ProgressDialog progressDialog;
     @Override
@@ -59,6 +60,8 @@ public class mostrarproveedores extends AppCompatActivity {
         telefono2txt = (TextView) findViewById(R.id.telefono2protxt);
         correotxt = (TextView) findViewById(R.id.correoprotxt);
         ingresarbtn = (Button) findViewById(R.id.ingresarpedidorebtn);
+        mostrarcompra = (Button) findViewById(R.id.mostrarcomprabtnmopro);
+
          id=getIntent().getExtras().getString("DATO");
       //  buscar(id);
 new task1().execute();
@@ -72,6 +75,16 @@ new task1().execute();
                 finish();
             }
         });
+        mostrarcompra.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(mostrarproveedores.this,mostrarcompras.class);
+                intent.putExtra("idproveedor", ""+getIntent().getExtras().getString("DATO"));
+                startActivity(intent);
+                finish();
+            }
+        });
+
     }
 
 
