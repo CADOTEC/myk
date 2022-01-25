@@ -11,6 +11,8 @@ import android.util.Log;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.myk.adaptadores.Adaptadorpesadas;
+import com.example.myk.clases.clasepesadas;
 import com.mysql.jdbc.Connection;
 
 import java.sql.DriverManager;

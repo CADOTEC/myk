@@ -15,27 +15,27 @@
             android:name=".listadetallepesadas"
             android:exported="false" />
         <activity
-            android:name=".detallelistacompras"
+            android:name=".proveedores.detallelistacompras"
             android:exported="false" />
         <activity
-            android:name=".mostrarcompras"
+            android:name=".proveedores.mostrarcompras"
             android:exported="false"
             android:windowSoftInputMode="adjustNothing" />
         <activity
-            android:name=".detallepesadalista"
+            android:name=".proveedores.detallepesadalista"
             android:exported="false" />
         <activity
-            android:name=".agregarpedidoultimo"
+            android:name=".proveedores.agregarpedidoultimo"
             android:exported="false" />
         <activity
-            android:name=".agregarproveedores"
+            android:name=".proveedores.agregarproveedores"
             android:exported="false" />
         <activity
             android:name=".ingresarpedidopro"
             android:exported="false"
             android:windowSoftInputMode="adjustNothing" />
         <activity
-            android:name=".mostrarproveedores"
+            android:name=".proveedores.mostrarproveedores"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -47,7 +47,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Principal2Activity"
+            android:name=".proveedores.Principal2Activity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Myk.NoActionBar" />

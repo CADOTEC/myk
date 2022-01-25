@@ -6,7 +6,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.SQLException;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,6 +21,10 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.myk.adaptadores.Adaptadorpesadas;
+import com.example.myk.clases.clasepesadas;
+import com.example.myk.proveedores.agregarpedidoultimo;
+import com.example.myk.proveedores.detallepesadalista;
 import com.mysql.jdbc.Connection;
 
 import java.sql.DriverManager;
@@ -262,7 +265,7 @@ public class ingresarpedidopro extends AppCompatActivity {
 
                 if(g>0||p>0||go>0||px>0||py>0){
 
-                    Intent intent=new Intent(ingresarpedidopro.this,agregarpedidoultimo.class);
+                    Intent intent=new Intent(ingresarpedidopro.this, agregarpedidoultimo.class);
                     //transfiriendo pesos
                     intent.putExtra("tgallinas", ""+g);
                     intent.putExtra("tpollos", ""+p);

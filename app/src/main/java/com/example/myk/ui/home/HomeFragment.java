@@ -6,7 +6,6 @@ import android.database.SQLException;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,14 +22,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.myk.Adaptadorproveedores;
-import com.example.myk.Global;
-import com.example.myk.MainActivity;
-import com.example.myk.Principal2Activity;
+import com.example.myk.adaptadores.Adaptadorproveedores;
 import com.example.myk.R;
-import com.example.myk.claseproveedores;
+import com.example.myk.clases.claseproveedores;
 import com.example.myk.databinding.FragmentHomeBinding;
-import com.example.myk.mostrarproveedores;
+import com.example.myk.proveedores.mostrarproveedores;
 import com.example.myk.ubicacionf;
 import com.mysql.jdbc.Connection;
 
@@ -52,7 +48,6 @@ public class HomeFragment extends Fragment {
     String gDATABASE = "myk";
     String gUSR = "root";
     String gPSW = "6jlkhQAUDD7v6MlJomFm";
-    String ba="";
     private ProgressDialog progressDialog;
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -68,7 +63,6 @@ public class HomeFragment extends Fragment {
         buscarpro = (Button) root.findViewById(R.id.buscarpro);
        // navUsername.setText(""+ Global.myVariable);
         llenarlistview();
-
 
 
         buscarpro.setOnClickListener(new View.OnClickListener(){

@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.database.SQLException;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.StrictMode;
 import android.util.Log;
 import android.view.View;
@@ -15,20 +14,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.example.myk.proveedores.Principal2Activity;
 import com.mysql.jdbc.Connection;
 
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.util.HashMap;
-import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     String gURL = "jdbc:mysql://";
@@ -77,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             ba=""+validar(usuario.getText().toString(),pass.getText().toString());
             if(ba.equals("1")){
 
-                Intent intent=new Intent(MainActivity.this,Principal2Activity.class);
+                Intent intent=new Intent(MainActivity.this, Principal2Activity.class);
                 startActivity(intent);
                 finish();
             }
